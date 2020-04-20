@@ -1,5 +1,6 @@
 package com.niluogege.plugindemo;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -7,6 +8,7 @@ import com.niluogege.plugindemo.utils.FileUtils;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 
 /**
  * Created by niluogege on 2020/4/20.
@@ -17,6 +19,9 @@ public class Plugin {
 
     private Context context;
     private String mPath;//apk 在沙盒中的存储路径
+    Application mApplication;
+    //插件使用的 context
+    private final PluginContext pluginContext;
 
     public Plugin(App app) {
         context = app;
@@ -37,6 +42,30 @@ public class Plugin {
 
         ClassLoader parentCl = getClass().getClassLoader().getParent();
         pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory.getAbsolutePath(), librarySearchPath.getAbsolutePath(), parentCl);
+
+        pluginContext = new PluginContext();
+
+        //加载 插件 Appliction
+        callApp();
+    }
+
+    private void callApp() {
+        try {
+            Class<?> clazz = pluginCl.loadClass("com.niluogege.plugin.App");
+            mApplication = (Application) clazz.newInstance();
+
+            // NOTE getDeclaredMethod只能获取当前类声明的方法，无法获取继承到的，而getMethod虽可以获取继承方法，但又不能获取非Public的方法
+            // NOTE 权衡利弊，还是仅构造函数用反射类，其余用它明确声明的类来做
+            //调用 attach
+            Method attach = Application.class.getDeclaredMethod("attach", Context.class);
+            attach.setAccessible(true);
+            attach.invoke(mApplication,context);
+
+            //调用 onCreate
+            mApplication.onCreate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
