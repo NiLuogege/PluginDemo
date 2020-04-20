@@ -1,6 +1,7 @@
 package com.niluogege.plugindemo;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.niluogege.plugindemo.utils.FileUtils;
 
@@ -35,8 +36,12 @@ public class Plugin {
     public static Class<?> loadClass(String name, boolean resolve) {
         Class<?> c = null;
         try {
+
+            Log.d("Plugin", "name= :"+name+" bool= " + MyPlugin.CONTENNERACT.equals(name));
+
             if (MyPlugin.CONTENNERACT.equals(name)) {
-                c = pluginCl.loadClass(name);
+                String realClass = MyPlugin.activityMap.get(name);
+                c = pluginCl.loadClass(realClass);
             }
         } catch (Exception e) {
             e.printStackTrace();

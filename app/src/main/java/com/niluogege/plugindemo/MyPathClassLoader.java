@@ -28,13 +28,15 @@ public class MyPathClassLoader extends PathClassLoader {
 
         try {
             //先从插件中找
-            Class<?> aClass = Plugin.loadClass(name,resolve);
+            Class<?> aClass = Plugin.loadClass(name, resolve);
             if (aClass == null) {
                 //再从之前的中找
                 aClass = originCl.loadClass(name);
                 if (aClass != null) {
                     return aClass;
                 }
+            } else {
+                return aClass;
             }
         } catch (Exception e) {
             e.printStackTrace();

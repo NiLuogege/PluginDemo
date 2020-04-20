@@ -8,8 +8,13 @@ import dalvik.system.DexClassLoader;
  * Created by niluogege on 2020/4/20.
  */
 public class PluginDexClassLoader extends DexClassLoader {
+
+    private final ClassLoader clearCl;
+
     public PluginDexClassLoader(String dexPath, String optimizedDirectory, String librarySearchPath, ClassLoader parent) {
         super(dexPath, optimizedDirectory, librarySearchPath, parent);
+
+        clearCl = App.instance.getClassLoader();
 
         Log.d("PluginDexClassLoader", toString());
     }
@@ -17,7 +22,14 @@ public class PluginDexClassLoader extends DexClassLoader {
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
 
+        Log.d("PluginDexClassLoader", name);
 
-        return super.loadClass(name, resolve);
+        Class<?> aClass = super.loadClass(name, resolve);
+
+        if (aClass == null) {
+            aClass = clearCl.loadClass(name);
+        }
+
+        return aClass;
     }
 }
