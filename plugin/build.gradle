@@ -15,6 +15,15 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    signingConfigs{
+        release {
+            storeFile file('./doc/key.jks')
+            storePassword "111111"
+            keyAlias "plugin"
+            keyPassword "111111"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
