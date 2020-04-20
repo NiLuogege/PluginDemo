@@ -1,4 +1,4 @@
-package com.niluogege.debug;
+package com.niluogege.plugin;
 
 import android.os.Bundle;
 
