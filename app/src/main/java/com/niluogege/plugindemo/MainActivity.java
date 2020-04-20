@@ -22,5 +22,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MyPlugin.createIntent("com.niluogege.plugin", "com.niluogege.plugin.MainActivity");
+                MyPlugin.startActivity(MainActivity.this,intent);
+
+            }
+        });
     }
 }
