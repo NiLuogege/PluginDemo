@@ -27,11 +27,12 @@ public class Plugin {
 
         //优化后dex路径
         File optimizedDirectory = new File(pluginDir, "odex");
-        if (!optimizedDirectory.exists()||optimizedDirectory.isFile()) optimizedDirectory.mkdirs();
+        if (!optimizedDirectory.exists() || optimizedDirectory.isFile())
+            optimizedDirectory.mkdirs();
 
         //so包路径
         File librarySearchPath = new File(pluginDir, "so");
-        if (!librarySearchPath.exists()||librarySearchPath.isFile()) librarySearchPath.mkdirs();
+        if (!librarySearchPath.exists() || librarySearchPath.isFile()) librarySearchPath.mkdirs();
 
 
         ClassLoader parentCl = getClass().getClassLoader().getParent();
@@ -43,7 +44,7 @@ public class Plugin {
         Class<?> c = null;
         try {
 
-            Log.d("Plugin", "name= :"+name+" bool= " + MyPlugin.CONTENNERACT.equals(name));
+            Log.d("Plugin", "name= :" + name + " bool= " + MyPlugin.CONTENNERACT.equals(name));
 
             if (MyPlugin.CONTENNERACT.equals(name)) {
                 String realClass = MyPlugin.activityMap.get(name);
