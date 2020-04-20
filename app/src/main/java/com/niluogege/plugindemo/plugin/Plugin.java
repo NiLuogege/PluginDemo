@@ -2,6 +2,10 @@ package com.niluogege.plugindemo.plugin;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.niluogege.plugindemo.App;
@@ -22,37 +26,59 @@ public class Plugin {
     private String mPath;//apk 在沙盒中的存储路径
     Application mApplication;
     //插件使用的 context
-    private final PluginContext pluginContext;
+    private PluginContext pluginContext;
+    //插件中解析出来的 Resources
+    private Resources mResources;
 
     public Plugin(App app) {
-        context = app;
-        //拷贝插件到沙盒中
-        copyPluginToSandbox();
-        //插件存放路径
-        File pluginDir = getPluginDir();
+        try {
+            context = app;
+            //拷贝插件到沙盒中
+            copyPluginToSandbox();
+            //插件存放路径
+            File pluginDir = getPluginDir();
 
-        //优化后dex路径
-        File optimizedDirectory = new File(pluginDir, "odex");
-        if (!optimizedDirectory.exists() || optimizedDirectory.isFile())
-            optimizedDirectory.mkdirs();
+            //优化后dex路径
+            File optimizedDirectory = new File(pluginDir, "odex");
+            if (!optimizedDirectory.exists() || optimizedDirectory.isFile())
+                optimizedDirectory.mkdirs();
 
-        //so包路径
-        File librarySearchPath = new File(pluginDir, "so");
-        if (!librarySearchPath.exists() || librarySearchPath.isFile()) librarySearchPath.mkdirs();
-
-
-        ClassLoader parentCl = getClass().getClassLoader().getParent();
-        pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory.getAbsolutePath(), librarySearchPath.getAbsolutePath(), parentCl);
-
-        pluginContext = new PluginContext();
+            //so包路径
+            File librarySearchPath = new File(pluginDir, "so");
+            if (!librarySearchPath.exists() || librarySearchPath.isFile())
+                librarySearchPath.mkdirs();
 
 
-        //初始化插件入口
-        initPluginEntry();
+            PackageManager pm = context.getPackageManager();
+            PackageInfo packageInfo = pm.getPackageArchiveInfo(mPath, PackageManager.GET_ACTIVITIES | PackageManager.GET_SERVICES | PackageManager.GET_PROVIDERS | PackageManager.GET_RECEIVERS | PackageManager.GET_META_DATA);
+            packageInfo.applicationInfo.sourceDir = mPath;
+            packageInfo.applicationInfo.publicSourceDir = mPath;
+
+//        if (TextUtils.isEmpty(packageInfo.applicationInfo.processName)) {
+//            packageInfo.applicationInfo.processName = packageInfo.applicationInfo.packageName;
+//        }
+
+            packageInfo.applicationInfo.nativeLibraryDir = librarySearchPath.getAbsolutePath();
+
+            Resources r = pm.getResourcesForApplication(packageInfo.applicationInfo);
+            mResources = new Resources(r.getAssets(), r.getDisplayMetrics(), r.getConfiguration());
 
 
-        //加载 插件 Appliction
-        callApp();
+            ClassLoader parentCl = getClass().getClassLoader().getParent();
+            pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory.getAbsolutePath(), librarySearchPath.getAbsolutePath(), parentCl);
+
+            pluginContext = new PluginContext(mResources);
+
+
+            //初始化插件入口
+            initPluginEntry();
+
+
+            //加载 插件 Appliction
+            callApp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initPluginEntry() {
@@ -140,6 +166,6 @@ public class Plugin {
 
 
     public Context createActivityContext() {
-        return new PluginContext();
+        return new PluginContext(mResources);
     }
 }
