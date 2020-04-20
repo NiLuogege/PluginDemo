@@ -20,14 +20,18 @@ public class PluginDexClassLoader extends DexClassLoader {
     }
 
     @Override
-    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+    protected Class<?> loadClass(String name, boolean resolve) {
+        Class<?> aClass = null;
+        try {
+            Log.d("PluginDexClassLoader", name);
 
-        Log.d("PluginDexClassLoader", name);
+            aClass = super.loadClass(name, resolve);
 
-        Class<?> aClass = super.loadClass(name, resolve);
-
-        if (aClass == null) {
-            aClass = clearCl.loadClass(name);
+            if (aClass == null) {
+                aClass = clearCl.loadClass(name);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
         return aClass;
