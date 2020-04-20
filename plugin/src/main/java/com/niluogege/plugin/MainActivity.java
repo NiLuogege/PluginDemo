@@ -1,5 +1,6 @@
 package com.niluogege.plugin;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Demo1Activity.class));
+                Intent intent = new Intent(MainActivity.this, Demo1Activity.class);
+                intent.setComponent(new ComponentName(getPackageName(), "com.niluogege.plugin.MainActivity"));
+                ComponentName component = intent.getComponent();
+                Log.e("MainActivity", "intent:" + intent+" component= "+component);
+                startActivity(intent);
             }
         });
 
