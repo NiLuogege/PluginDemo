@@ -15,7 +15,7 @@ public class PluginActivity extends Activity {
 
         try {
             //去宿主中找到 com.niluogege.plugindemo.MyPlugin 这个类
-            Class<?> forName = Class.forName("com.niluogege.plugindemo.MyPlugin", false, Entry.hostCL);
+            Class<?> forName = Class.forName("com.niluogege.plugindemo.plugin.MyPlugin", false, Entry.hostCL);
             Method createActivityContext = forName.getDeclaredMethod("createActivityContext", Activity.class, Context.class);
             createActivityContext.setAccessible(true);
             Context context = (Context) createActivityContext.invoke(null, this, newBase);
