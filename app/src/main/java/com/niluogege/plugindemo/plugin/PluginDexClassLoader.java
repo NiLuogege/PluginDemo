@@ -1,6 +1,8 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.util.Log;
+
+import com.niluogege.plugindemo.App;
 
 import dalvik.system.DexClassLoader;
 

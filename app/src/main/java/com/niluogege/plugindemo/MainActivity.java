@@ -2,10 +2,11 @@ package com.niluogege.plugindemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.niluogege.plugindemo.plugin.MyPlugin;
 
 public class MainActivity extends AppCompatActivity {
 

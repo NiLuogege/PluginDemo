@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.utils;
 
 import android.content.Context;
 

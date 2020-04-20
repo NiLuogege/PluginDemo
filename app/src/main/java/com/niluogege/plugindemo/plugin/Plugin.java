@@ -1,9 +1,10 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.niluogege.plugindemo.App;
 import com.niluogege.plugindemo.utils.FileUtils;
 
 import java.io.File;

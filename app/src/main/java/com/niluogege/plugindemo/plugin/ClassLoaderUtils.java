@@ -1,7 +1,9 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.app.Application;
 import android.content.Context;
+
+import com.niluogege.plugindemo.utils.ReflectUtils;
 
 /**
  * Created by niluogege on 2020/4/20.

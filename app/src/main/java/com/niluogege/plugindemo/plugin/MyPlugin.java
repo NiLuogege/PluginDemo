@@ -1,9 +1,11 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+
+import com.niluogege.plugindemo.App;
 
 import java.util.HashMap;
 import java.util.Map;

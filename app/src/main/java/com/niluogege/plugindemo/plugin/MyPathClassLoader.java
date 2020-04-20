@@ -1,7 +1,10 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.os.Build;
 import android.util.Log;
+
+import com.niluogege.plugindemo.BuildConfig;
+import com.niluogege.plugindemo.utils.ReflectUtils;
 
 import java.lang.reflect.Field;
 

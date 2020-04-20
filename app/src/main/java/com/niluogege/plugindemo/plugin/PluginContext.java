@@ -1,4 +1,4 @@
-package com.niluogege.plugindemo;
+package com.niluogege.plugindemo.plugin;
 
 import android.view.ContextThemeWrapper;
 
