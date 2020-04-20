@@ -24,12 +24,18 @@ public class Plugin {
         copyPluginToSandbox();
         //插件存放路径
         File pluginDir = getPluginDir();
+
         //优化后dex路径
-        String optimizedDirectory = new File(pluginDir, "odex").getAbsolutePath();
+        File optimizedDirectory = new File(pluginDir, "odex");
+        if (!optimizedDirectory.exists()||optimizedDirectory.isFile()) optimizedDirectory.mkdirs();
+
         //so包路径
-        String librarySearchPath = new File(pluginDir, "so").getAbsolutePath();
+        File librarySearchPath = new File(pluginDir, "so");
+        if (!librarySearchPath.exists()||librarySearchPath.isFile()) librarySearchPath.mkdirs();
+
+
         ClassLoader parentCl = getClass().getClassLoader().getParent();
-        pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory, librarySearchPath, parentCl);
+        pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory.getAbsolutePath(), librarySearchPath.getAbsolutePath(), parentCl);
     }
 
 
