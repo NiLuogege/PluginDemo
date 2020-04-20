@@ -12,7 +12,7 @@ import java.io.InputStream;
  */
 public class Plugin {
     //插件使用的classLoader
-    public ClassLoader pluginCl;//插件的classLoader
+    public static ClassLoader pluginCl;//插件的classLoader
 
     private Context context;
     private String mPath;//apk 在沙盒中的存储路径
@@ -32,8 +32,8 @@ public class Plugin {
     }
 
 
-    public static Plugin getPlugin(String name) {
-        return null;
+    public static ClassLoader getPluginCl() {
+        return pluginCl;
     }
 
     public void installPlugin() {

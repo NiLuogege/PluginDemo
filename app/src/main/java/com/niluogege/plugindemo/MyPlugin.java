@@ -1,6 +1,7 @@
 package com.niluogege.plugindemo;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -9,7 +10,7 @@ import android.content.Intent;
 public class MyPlugin {
     /**
      * @param pluginPkg 插件包名
-     * @param aCls       要打卡的插件中的Activity
+     * @param aCls      要打卡的插件中的Activity
      * @return
      */
     public static Intent createIntent(String pluginPkg, String aCls) {
@@ -22,7 +23,7 @@ public class MyPlugin {
         return intent;
     }
 
-    public static void startActivity(Intent intent) {
-
+    public static void startActivity(Context context, Intent intent) {
+        context.startActivity(intent);
     }
 }

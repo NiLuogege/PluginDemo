@@ -1,5 +1,7 @@
 package com.niluogege.plugindemo;
 
+import android.util.Log;
+
 import dalvik.system.PathClassLoader;
 
 /**
@@ -18,9 +20,11 @@ public class MyPathClassLoader extends PathClassLoader {
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
 
+        Log.e("MyPathClassLoader", name);
+
         try {
             //先从插件中找
-            Class<?> aClass = Plugin.getPlugin(name).pluginCl.loadClass(name);
+            Class<?> aClass = Plugin.getPluginCl().loadClass(name);
             if (aClass == null) {
                 //再从之前的中找
                 aClass = originCl.loadClass(name);
