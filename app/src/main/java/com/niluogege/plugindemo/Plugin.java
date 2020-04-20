@@ -138,4 +138,7 @@ public class Plugin {
     }
 
 
+    public Context createActivityContext() {
+        return new PluginContext();
+    }
 }

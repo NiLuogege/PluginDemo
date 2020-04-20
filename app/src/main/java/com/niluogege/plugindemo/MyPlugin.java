@@ -39,6 +39,6 @@ public class MyPlugin {
 
 
     public static Context createActivityContext(Activity activity,Context base){
-        return null;
+        return App.instance.plugin.createActivityContext();
     }
 }
