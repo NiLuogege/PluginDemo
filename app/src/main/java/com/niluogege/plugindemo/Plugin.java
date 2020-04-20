@@ -45,8 +45,23 @@ public class Plugin {
 
         pluginContext = new PluginContext();
 
+
+        //初始化插件入口
+        initPluginEntry();
+
+
         //加载 插件 Appliction
         callApp();
+    }
+
+    private void initPluginEntry() {
+        try {
+            Class<?> aClass = pluginCl.loadClass("com.niluogege.plugin.plugin.Entry");
+            Method create = aClass.getDeclaredMethod("create", Context.class, ClassLoader.class);
+            create.invoke(null, pluginContext, ClassLoaderUtils.getHostCL());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void callApp() {
@@ -59,7 +74,7 @@ public class Plugin {
             //调用 attach
             Method attach = Application.class.getDeclaredMethod("attach", Context.class);
             attach.setAccessible(true);
-            attach.invoke(mApplication,context);
+            attach.invoke(mApplication, context);
 
             //调用 onCreate
             mApplication.onCreate();

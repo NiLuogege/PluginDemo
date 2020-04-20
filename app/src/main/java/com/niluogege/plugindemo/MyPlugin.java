@@ -1,5 +1,6 @@
 package com.niluogege.plugindemo;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -34,5 +35,10 @@ public class MyPlugin {
 
     public static void startActivity(Context context, Intent intent) {
         context.startActivity(intent);
+    }
+
+
+    public static Context createActivityContext(Activity activity,Context base){
+        return null;
     }
 }

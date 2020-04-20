@@ -6,10 +6,16 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.niluogege.plugin.plugin.PluginActivity;
+
 /**
  * Created by niluogege on 2020/4/20.
  */
-public class Demo2Activity extends Activity {
+public class Demo2Activity extends PluginActivity {
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
