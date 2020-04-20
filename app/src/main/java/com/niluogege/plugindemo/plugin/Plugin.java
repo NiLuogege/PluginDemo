@@ -22,7 +22,7 @@ public class Plugin {
     //插件使用的classLoader
     public static ClassLoader pluginCl;//插件的classLoader
 
-    private Context context;
+    private Context context;//宿主APPliction
     private String mPath;//apk 在沙盒中的存储路径
     Application mApplication;
     //插件使用的 context
@@ -67,7 +67,7 @@ public class Plugin {
             ClassLoader parentCl = getClass().getClassLoader().getParent();
             pluginCl = new PluginDexClassLoader(mPath, optimizedDirectory.getAbsolutePath(), librarySearchPath.getAbsolutePath(), parentCl);
 
-            pluginContext = new PluginContext(mResources);
+            pluginContext = new PluginContext(context,mResources);
 
 
             //初始化插件入口
@@ -166,6 +166,6 @@ public class Plugin {
 
 
     public Context createActivityContext() {
-        return new PluginContext(mResources);
+        return new PluginContext(context,mResources);
     }
 }
