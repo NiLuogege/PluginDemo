@@ -14,8 +14,8 @@ public class App extends Application {
         //hook classLoader
         ClassLoaderUtils.hookPathCL(this);
         //安装 插件
-        Plugin.init(this);
-        Plugin.installPlugin();
+        Plugin plugin = new Plugin(this);
+        plugin.installPlugin();
     }
 
     @Override
