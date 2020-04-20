@@ -28,7 +28,7 @@ public class MyPathClassLoader extends PathClassLoader {
 
         try {
             //先从插件中找
-            Class<?> aClass = Plugin.getPluginCl().loadClass(name);
+            Class<?> aClass = Plugin.loadClass(name,resolve);
             if (aClass == null) {
                 //再从之前的中找
                 aClass = originCl.loadClass(name);

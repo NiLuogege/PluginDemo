@@ -32,8 +32,17 @@ public class Plugin {
     }
 
 
-    public static ClassLoader getPluginCl() {
-        return pluginCl;
+    public static Class<?> loadClass(String name, boolean resolve) {
+        Class<?> c = null;
+        try {
+            if (MyPlugin.CONTENNERACT.equals(name)) {
+                c = pluginCl.loadClass(name);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return c;
     }
 
     public void installPlugin() {
