@@ -2,6 +2,7 @@ package com.niluogege.plugin.plugin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import java.lang.reflect.Method;
 
@@ -18,9 +19,10 @@ public class PluginActivity extends Activity {
             Class<?> forName = Class.forName("com.niluogege.plugindemo.plugin.MyPlugin", false, Entry.hostCL);
             Method createActivityContext = forName.getDeclaredMethod("createActivityContext", Activity.class, Context.class);
             createActivityContext.setAccessible(true);
-            Context context = (Context) createActivityContext.invoke(null, this, newBase);
+            newBase = (Context) createActivityContext.invoke(null, this, newBase);
+            Log.d("PluginActivity", "newBase:" + newBase);
             //替换插件Activity用的 mBase
-            super.attachBaseContext(context);
+            super.attachBaseContext(newBase);
         } catch (Exception e) {
             e.printStackTrace();
         }

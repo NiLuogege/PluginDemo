@@ -21,7 +21,7 @@ public class App extends Application {
         //hook classLoader
         ClassLoaderUtils.hookPathCL(this);
         //安装 插件
-        Plugin plugin = new Plugin(this);
+        plugin = new Plugin(this);
         plugin.installPlugin();
     }
 
