@@ -16,6 +16,6 @@ public class Demo2Activity extends Activity {
 
         setContentView(R.layout.activity_demo1);
 
-        Log.d("Demo2Activity", "Demo2Activity");
+        Log.e("Demo2Activity", "Demo2Activity");
     }
 }
