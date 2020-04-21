@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.niluogege.plugindemo.App;
@@ -55,7 +56,7 @@ public class MyPlugin {
         String className = component.getClassName();
         Log.e("MyPlugin", " startActivity-> activity:" + activity + " PackageName= " + packageName + " ClassName= " + className + "startWith= " + className.startsWith(CONTENNERACT));
 
-        if (className.startsWith(CONTENNERACT)) {//是否已经替换过
+        if (className.startsWith(CONTENNERACT) || TextUtils.equals(App.instance.getPackageName(), packageName)) {//是否已经替换过
             return false;
         } else {
             intent = createIntent(packageName, className);

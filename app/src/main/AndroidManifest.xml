@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".HostActivity2" />
+
         <activity
             android:name=".PlaceholderActivity"
             android:configChanges='keyboard|keyboardHidden|orientation|screenSize'

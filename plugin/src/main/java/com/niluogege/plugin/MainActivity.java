@@ -26,6 +26,16 @@ public class MainActivity extends PluginAppCompatActivity {
             }
         });
 
+        findViewById(R.id.tv2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //因为我们设置的classLoader 会在 插件中找不到的手 去 宿主中找，所以我们 直接 打开就行了
+                Intent intent = new Intent();
+                intent.setClassName("com.niluogege.plugindemo", "com.niluogege.plugindemo.HostActivity2");
+                startActivity(intent);
+            }
+        });
+
         Context context = findViewById(R.id.tv).getContext();
 
         Context applicationContext = getApplicationContext();
