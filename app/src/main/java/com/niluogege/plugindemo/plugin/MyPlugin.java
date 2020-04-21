@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.niluogege.plugindemo.App;
@@ -47,10 +49,19 @@ public class MyPlugin {
      * @param activity
      * @param intent
      */
-    public static void startActivity(Activity activity, Intent intent) {
+    public static boolean startActivity(Activity activity, Intent intent) {
         ComponentName component = intent.getComponent();
-        Log.d("MyPlugin", " startActivity-> activity:" + activity + " PackageName= " + component.getPackageName() + " ClassName= " + component.getClassName());
-        createIntent(component.getPackageName(), component.getClassName());
-        activity.startActivity(intent);
+        String packageName = component.getPackageName();
+        String className = component.getClassName();
+        Log.e("MyPlugin", " startActivity-> activity:" + activity + " PackageName= " + packageName + " ClassName= " + className + "startWith= " + className.startsWith(CONTENNERACT));
+
+        if (className.startsWith(CONTENNERACT)) {//是否已经替换过
+            return false;
+        } else {
+            intent = createIntent(packageName, className);
+            activity.startActivity(intent);
+            return true;
+        }
     }
+
 }

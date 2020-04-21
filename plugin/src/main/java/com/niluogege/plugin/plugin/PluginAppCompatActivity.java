@@ -3,6 +3,8 @@ package com.niluogege.plugin.plugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.lang.reflect.Method;
@@ -32,14 +34,21 @@ public class PluginAppCompatActivity extends Activity {
 
     @Override
     public void startActivity(Intent intent) {
+        Log.e("PluginAppCompatActivity", "startActivity");
         try {
             Class<?> forName = Class.forName("com.niluogege.plugindemo.plugin.MyPlugin", false, Entry.hostCL);
             Method startActivity = forName.getDeclaredMethod("startActivity", Activity.class, Intent.class);
             startActivity.setAccessible(true);
-            startActivity.invoke(null, this, intent);
+            //是否是替换操作
+            boolean isReplace = (boolean) startActivity.invoke(null, this, intent);
+            Log.e("PluginAppCompatActivity", "startActivity isReplaced= " + isReplace);
+            if (isReplace) {
+                return;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         super.startActivity(intent);
     }
+
 }
