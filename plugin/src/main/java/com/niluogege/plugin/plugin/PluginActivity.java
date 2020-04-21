@@ -2,6 +2,7 @@ package com.niluogege.plugin.plugin;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.lang.reflect.Method;
@@ -27,5 +28,19 @@ public class PluginActivity extends Activity {
             e.printStackTrace();
         }
 
+    }
+
+
+    @Override
+    public void startActivity(Intent intent) {
+        try {
+            Class<?> forName = Class.forName("com.niluogege.plugindemo.plugin.MyPlugin", false, Entry.hostCL);
+            Method startActivity = forName.getDeclaredMethod("startActivity", Activity.class, Intent.class);
+            startActivity.setAccessible(true);
+            startActivity.invoke(null, this, intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.startActivity(intent);
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.niluogege.plugindemo.App;
 
@@ -42,5 +43,14 @@ public class MyPlugin {
 
     public static Context createActivityContext(Activity activity,Context base){
         return App.instance.plugin.createActivityContext();
+    }
+
+    /**
+     * 提供给插件中 使用Activity打开插件中的Activity
+     * @param activity
+     * @param intent
+     */
+    public static void startActivity(Activity activity, Intent intent) {
+        Log.d("MyPlugin", " startActivity-> activity:" + activity+" intent= "+intent.toString());
     }
 }
