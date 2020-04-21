@@ -36,21 +36,21 @@ public class MyPlugin {
         return intent;
     }
 
-    public static void startActivity(Context context, Intent intent) {
-        context.startActivity(intent);
-    }
 
-
-    public static Context createActivityContext(Activity activity,Context base){
+    public static Context createActivityContext(Activity activity, Context base) {
         return App.instance.plugin.createActivityContext();
     }
 
     /**
      * 提供给插件中 使用Activity打开插件中的Activity
+     *
      * @param activity
      * @param intent
      */
     public static void startActivity(Activity activity, Intent intent) {
-        Log.d("MyPlugin", " startActivity-> activity:" + activity+" intent= "+intent.toString());
+        ComponentName component = intent.getComponent();
+        Log.d("MyPlugin", " startActivity-> activity:" + activity + " PackageName= " + component.getPackageName() + " ClassName= " + component.getClassName());
+        createIntent(component.getPackageName(), component.getClassName());
+        activity.startActivity(intent);
     }
 }

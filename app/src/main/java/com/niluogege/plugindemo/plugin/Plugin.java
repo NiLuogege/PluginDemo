@@ -141,7 +141,7 @@ public class Plugin {
             //私有目录下的 pluginDir
             File pluginDir = getPluginDir();
             // assets 文件夹下的 插件
-            InputStream is = context.getAssets().open("plugin.apk");
+            InputStream is = context.getAssets().open("plugin-release.apk");
 
             if (!pluginDir.exists() || pluginDir.isFile()) {
                 pluginDir.mkdirs();

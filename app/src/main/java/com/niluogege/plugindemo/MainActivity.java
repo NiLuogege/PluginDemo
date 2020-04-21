@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = MyPlugin.createIntent("com.niluogege.plugin", "com.niluogege.plugin.MainActivity");
-                MyPlugin.startActivity(MainActivity.this,intent);
+                startActivity(intent);
 
             }
         });
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = MyPlugin.createIntent("com.niluogege.plugin", "com.niluogege.plugin.Demo2Activity");
-                MyPlugin.startActivity(MainActivity.this,intent);
+                startActivity(intent);
 
             }
         });
