@@ -11,6 +11,6 @@
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:text="我是Demo2Activity， 点我！"/>
 
 </LinearLayout>

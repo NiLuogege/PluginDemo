@@ -9,7 +9,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+import com.niluogege.plugin.plugin.PluginAppCompatActivity;
+
+public class MainActivity extends PluginAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
