@@ -22,7 +22,7 @@ public class Demo1Activity extends PluginAppCompatActivity {
         setContentView(R.layout.activity_demo1);
 
         Button tv = findViewById(R.id.tv);
-        tv.setText("我是Demo2Activity， 点我！");
+        tv.setText("我是Demo1Activity， 点我！");
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

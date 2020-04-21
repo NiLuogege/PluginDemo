@@ -30,14 +30,19 @@ public class PluginActivity extends Activity {
 
     }
 
-
     @Override
     public void startActivity(Intent intent) {
+        Log.e("PluginActivity", "startActivity");
         try {
             Class<?> forName = Class.forName("com.niluogege.plugindemo.plugin.MyPlugin", false, Entry.hostCL);
             Method startActivity = forName.getDeclaredMethod("startActivity", Activity.class, Intent.class);
             startActivity.setAccessible(true);
-            startActivity.invoke(null, this, intent);
+            //是否是替换操作
+            boolean isReplace = (boolean) startActivity.invoke(null, this, intent);
+            Log.e("PluginActivity", "startActivity isReplaced= " + isReplace);
+            if (isReplace) {
+                return;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,9 +22,6 @@ public class MainActivity extends PluginAppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Demo1Activity.class);
-                intent.setComponent(new ComponentName(getPackageName(), "com.niluogege.plugin.MainActivity"));
-                ComponentName component = intent.getComponent();
-                Log.e("MainActivity", "intent:" + intent+" component= "+component);
                 startActivity(intent);
             }
         });
