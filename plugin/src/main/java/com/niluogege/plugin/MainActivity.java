@@ -43,7 +43,7 @@ public class MainActivity extends PluginAppCompatActivity {
             public void onClick(View v) {
                 //通过 getIdentifier 需要设置为 插件的包名，才能正确获取到 资源
                 int identifier = getResources().getIdentifier("huabei", "mipmap", "com.niluogege.plugin");
-                //通过 getPackageName 方法获取到的是 宿主的 包名
+                //通过 getPackageName 方法获取到的是 宿主的 包名 ，所以不能直接用api获取
                 String packageName = getPackageName();
                 Log.e("MainActivity", "插件中 getPackageName()= " + packageName);
                 iv.setImageResource(identifier);
