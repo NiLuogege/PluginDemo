@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +18,8 @@ public class MainActivity extends PluginAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final ImageView iv = findViewById(R.id.iv);
 
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +35,18 @@ public class MainActivity extends PluginAppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClassName("com.niluogege.plugindemo", "com.niluogege.plugindemo.HostActivity2");
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.tv3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //通过 getIdentifier 需要设置为 插件的包名，才能正确获取到 资源
+                int identifier = getResources().getIdentifier("huabei", "mipmap", "com.niluogege.plugin");
+                //通过 getPackageName 方法获取到的是 宿主的 包名
+                String packageName = getPackageName();
+                Log.e("MainActivity", "插件中 getPackageName()= " + packageName);
+                iv.setImageResource(identifier);
             }
         });
 

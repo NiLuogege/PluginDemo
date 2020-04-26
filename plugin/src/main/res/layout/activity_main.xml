@@ -18,9 +18,18 @@
         android:layout_height="wrap_content"
         android:text="打开宿主Activity" />
 
+
+    <Button
+        android:id="@+id/tv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="通过 getIdentifier  设置下面的图片" />
+
     <ImageView
+        android:id="@+id/iv"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:src="@mipmap/avatar_user" />
+
 
 </LinearLayout>
